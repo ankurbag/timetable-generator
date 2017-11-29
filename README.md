@@ -2,5 +2,5 @@
 Academic project to implement the Genetic Algorithm
 
 ## TO-DO List
-- [ ] for an empty checkbox
-- [x] for a checked checkbox
+- [ ] Study Genetic Algorithm
+- [ ] Decide Problem to be solved 
