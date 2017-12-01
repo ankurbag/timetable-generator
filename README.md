@@ -12,7 +12,7 @@ Academic project to implement the Genetic Algorithm
     - [ ] https://www.brainz.org/15-real-world-applications-genetic-algorithms
     - [ ] Consensus Algorithm
     - [X] Ripple Consensus
- - [ ] Tentavi Plan
+ - [ ] Tentative Plan
     - [ ] Framework
     - [ ] Test problems - Maze, Class Scheduler and Cryptocurrency
     
