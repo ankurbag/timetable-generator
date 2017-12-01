@@ -7,13 +7,20 @@ Academic project to implement the Genetic Algorithm
     - [ ] https://github.com/Apress/genetic-algorithms-in-java-basics
     - [ ] http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
     - [ ] https://stackoverflow.com/questions/1575061/ga-written-in-java
+
 - [ ] Decide Problem to be solved 
     - [ ] https://en.wikipedia.org/wiki/List_of_genetic_algorithm_applications
     - [ ] https://www.brainz.org/15-real-world-applications-genetic-algorithms
     - [ ] Consensus Algorithm
-    - [X] Ripple Consensus
+    - [ ] Maze Runner
+    - [ ] Class Scheduler
+    - [ ] Cryptocurrency
+    - [ ] Image processing
+    
  - [ ] Tentative Plan
-    - [ ] Framework
-    - [ ] Test problems - Maze, Class Scheduler and Cryptocurrency
+    - [ ] GA Framework
+    - [ ] Finalize problems - Maze, Class Scheduler and Cryptocurrency
+    - [ ] Decide Use case
+    - [ ] UI
     
  
