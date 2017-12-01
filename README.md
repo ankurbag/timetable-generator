@@ -16,6 +16,7 @@ Academic project to implement the Genetic Algorithm
     - [ ] Class Scheduler
     - [ ] Cryptocurrency
     - [ ] Image processing
+    - [ ] Trading Simulator https://www.investopedia.com/articles/financial-theory/11/using-genetic-algorithms-forecast-financial-markets.asp
     
  - [ ] Tentative Plan
     - [ ] GA Framework
