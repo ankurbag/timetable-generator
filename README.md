@@ -17,6 +17,7 @@ Academic project to implement the Genetic Algorithm
     - [ ] Cryptocurrency
     - [ ] Image processing
     - [ ] Trading Simulator https://www.investopedia.com/articles/financial-theory/11/using-genetic-algorithms-forecast-financial-markets.asp
+    - [ ] Evolve Sentence https://www.youtube.com/watch?v=p637zWPXAAk&index=6&list=PLiWcnsSmNaTcyR8-F3L4TZjMM1bDHKvw9
     
  - [ ] Tentative Plan
     - [ ] GA Framework
