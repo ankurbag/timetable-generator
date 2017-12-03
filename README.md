@@ -1,30 +1,6 @@
 # Project: Genetic Algorithms
 Academic project to implement the Genetic Algorithm
 
-## TO-DO List
-- [ ] Study Genetic Algorithm
-    - [ ] Travelling Salesman Problem - http://www.baeldung.com/java-simulated-annealing-for-traveling-salesman
-    - [ ] https://github.com/Apress/genetic-algorithms-in-java-basics
-    - [ ] http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
-    - [ ] https://stackoverflow.com/questions/1575061/ga-written-in-java
-
-- [ ] Decide Problem to be solved 
-    - [ ] https://en.wikipedia.org/wiki/List_of_genetic_algorithm_applications
-    - [ ] https://www.brainz.org/15-real-world-applications-genetic-algorithms
-    - [ ] Consensus Algorithm
-    - [ ] Maze Runner
-    - [ ] Class Scheduler
-    - [ ] Cryptocurrency
-    - [ ] Image processing
-    - [ ] Trading Simulator https://www.investopedia.com/articles/financial-theory/11/using-genetic-algorithms-forecast-financial-markets.asp
-    - [ ] Evolve Sentence https://www.youtube.com/watch?v=p637zWPXAAk&index=6&list=PLiWcnsSmNaTcyR8-F3L4TZjMM1bDHKvw9
-    
- - [ ] Tentative Plan
-    - [ ] GA Framework
-    - [ ] Finalize problems - Maze, Class Scheduler and Cryptocurrency
-    - [ ] Decide Use case
-    - [ ] UI
-    
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
