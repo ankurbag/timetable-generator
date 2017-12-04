@@ -29,7 +29,7 @@ We have 2 projects in the repository
 ```
 1) In the command line
 ```
-git clone https://github.com/spring-projects/spring-petclinic.git
+git clone https://github.com/ankurbag/INFO6205_06.git
 ```
 2) Inside Eclipse/STS
 ```
