@@ -1,5 +1,5 @@
-# Project: Genetic Algorithms
-Academic project to implement the Genetic Algorithm
+# Project: Time Table Generator 
+Academic project to implement the Genetic Algorithm. We are aiming to create a rest project for generating Timetable(Class Schedule).
 
 ## Getting Started
 
@@ -11,10 +11,13 @@ We need following things for set up-
 
 #### IDE & project configuration
 ```
-Eclipse
+Eclipse or STS
 ```
 ```
-Java
+Java-8
+```
+```
+Spring MVC
 ```
 
 ### Installing
@@ -22,11 +25,26 @@ Java
 We have 2 projects in the repository
 
 ```
-1. API project - Java
+1. API project - Spring MVC web framework
 ```
-End with an example of getting some data out of the system or using it for a little demo
+1) In the command line
+```
+git clone https://github.com/spring-projects/spring-petclinic.git
+```
+2) Inside Eclipse/STS
+```
+File -> Import -> Maven -> Existing Maven project
+```
 
 ## Running the tests
 
 Explain how to run the automated tests for this system
+
+## Author
+Ishista B.
+Elton B.
+Ankur B.
+
+## License
+* [MIT License](http://www.opensource.org/licenses/mit-license.php)
  
