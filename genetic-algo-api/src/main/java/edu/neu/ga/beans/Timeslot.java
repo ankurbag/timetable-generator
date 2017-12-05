@@ -3,7 +3,7 @@ package edu.neu.ga.beans;
 /**
  * Simple timeslot abstraction -- just represents a timeslot (like "Wed 9:00am-11:00am").
  *  
- * @author bkanber
+ * @author ankur
  *
  */
 public class Timeslot {

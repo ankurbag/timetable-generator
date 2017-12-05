@@ -1,4 +1,9 @@
-package edu.neu.ga.beans;
+package edu.neu.ga.service;
+
+import edu.neu.ga.beans.Class;
+import edu.neu.ga.beans.GeneticAlgorithm;
+import edu.neu.ga.beans.Population;
+import edu.neu.ga.beans.Timetable;
 
 /**
  * Don't be daunted by the number of classes in this chapter -- most of them are
@@ -24,10 +29,10 @@ package edu.neu.ga.beans;
  * university has would come from a database, but this isn't a book about
  * databases so we hardcode it.
  * 
- * @author bkanber
+ * @author ankur
  *
  */
-public class TimetableGA {
+public class TimetableService {
 
     public static void main(String[] args) {
     	// Get a Timetable object with all the available information.
