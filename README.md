@@ -2,7 +2,7 @@
 Academic project to implement the Genetic Algorithm. We are aiming to create a rest project for generating Timetable(Class Schedule).
 
 ## URL of REST
-http://timetable-api.us-east-1.elasticbeanstalk.com/api/swagger-ui.html
+http://timetable-api.us-east-1.elasticbeanstalk.com/swagger-ui.html
 
 ## Getting Started
 
