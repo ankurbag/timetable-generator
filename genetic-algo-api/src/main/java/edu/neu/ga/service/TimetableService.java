@@ -1,7 +1,12 @@
 package edu.neu.ga.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +53,6 @@ public class TimetableService {
 
 	private static final Logger logger = LoggerFactory.getLogger(TimetableService.class);
 
-	
 	public TimetableService() {
 		timetable = initializeTimetable();
 
@@ -66,11 +70,11 @@ public class TimetableService {
 	}
 
 	/**
-	 * Returns Arrays of Class
+	 * Returns List of Class. It is a single threaded execution.
 	 * 
 	 * @return
 	 */
-	public List<Class> execute() {
+	public List<Class> execute_without_parallisation() {
 
 		// Start evolution loop
 		while (ga.isTerminationConditionMet(generation, 1000) == false
@@ -110,6 +114,64 @@ public class TimetableService {
 			logger.info("-----");
 			classIndex++;
 		}
+		return Arrays.asList(classes);
+	}
+
+	/**
+	 * Returns List of Class. Parallelized execution
+	 * 
+	 * @return
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
+	 */
+	public List<Class> execute() throws InterruptedException, ExecutionException {
+
+		// Start evolution loop
+		
+		//Run Evolution for Partition 1
+		CompletableFuture<Map<Integer, Population>> partition1 = CompletableFuture.supplyAsync(() -> {
+			return evolve(ga,timetable);
+		});
+		
+		//Run Evolution for Partition 2
+		CompletableFuture<Map<Integer, Population>> patition2 = CompletableFuture.supplyAsync(() -> {
+			return evolve(ga,timetable);
+		});
+
+		//Merge the results
+		CompletableFuture<Map<Integer, Population>> combinedFuture = patition2.thenCombine(partition1,
+				(xs1, xs2) -> {
+					System.out.println("In merge..");
+					Map<Integer, Population> result = new LinkedHashMap(xs1.size() + xs2.size());
+					return merge(result, xs1, xs2);
+				});
+
+		//Get the fittest population
+		Map<Integer, Population> result = combinedFuture.get();
+		population = result.get(result.size());
+
+		// Print fitness
+		timetable.createClasses(population.getFittest(0));
+		System.out.println();
+		System.out.println("Solution found in " + result.size() + " generations");
+		System.out.println("Final solution fitness: " + population.getFittest(0).getFitness());
+		System.out.println("Clashes: " + timetable.calcClashes());
+
+		// Print classes
+		System.out.println();
+		Class classes[] = timetable.getClasses();
+		int classIndex = 1;
+		for (Class bestClass : classes) {
+			System.out.println("Class " + classIndex + ":");
+			System.out.println("Module: " + timetable.getModule(bestClass.getModuleId()).getModuleName());
+			System.out.println("Group: " + timetable.getGroup(bestClass.getGroupId()).getGroupId());
+			System.out.println("Room: " + timetable.getRoom(bestClass.getRoomId()).getRoomNumber());
+			System.out.println("Professor: " + timetable.getProfessor(bestClass.getProfessorId()).getProfessorName());
+			System.out.println("Time: " + timetable.getTimeslot(bestClass.getTimeslotId()).getTimeslot());
+			System.out.println("-----");
+			classIndex++;
+		}
+
 		return Arrays.asList(classes);
 	}
 
@@ -174,4 +236,80 @@ public class TimetableService {
 		timetable.addGroup(10, 25, new int[] { 3, 4 });
 		return timetable;
 	}
+	
+	/**
+	 * Creates a map of generation and population in ascending order.
+	 * 
+	 * @param ga
+	 * @param timetable
+	 * @return Map <Integer,Population>
+	 */
+	private Map<Integer, Population> evolve(GeneticAlgorithm ga, Timetable timetable) {
+		// Initialize Result
+		Map<Integer, Population> res = new HashMap();
+
+		Population population = ga.initPopulation(timetable);
+		// Evaluate population
+        ga.evalPopulation(population, timetable);
+        
+		// Evaluate population
+		ga.evalPopulation(population, timetable);
+
+		// Keep track of current generation
+		int generation = 1;
+
+		// Start evolution loop
+		while (ga.isTerminationConditionMet(generation, 1000) == false
+				&& ga.isTerminationConditionMet(population) == false) {
+			// Print fitness
+			System.out.println("G" + generation + " Best fitness: " + population.getFittest(0).getFitness());
+
+			// Apply crossover
+			population = ga.crossoverPopulation(population);
+
+			// Apply mutation
+			population = ga.mutatePopulation(population, timetable);
+
+			// Evaluate population
+			ga.evalPopulation(population, timetable);
+
+			// Add to the Map
+			res.put(generation, population);
+
+			// Increment the current generation
+			generation++;
+
+		}
+		return res;
+
+	}
+	
+	/**
+	 * Merge the results of 2 partitions in the order of population fitness.
+	 * @param result
+	 * @param left
+	 * @param right
+	 * @return
+	 */
+	private Map<Integer,Population> merge(Map<Integer,Population> result, Map<Integer,Population> left, Map<Integer,Population> right) {
+		int i1 = 1;
+		int i2 = 1;
+		System.out.println(left.size()+right.size());
+		int size = left.size()+right.size();
+		for (int i = 1; i <size ; i++) {
+			if (i2 > right.size() || (i1 < left.size() && left.get(i1).getPopulationFitness() <= right.get(i2).getPopulationFitness())) {
+				result.put(i, left.get(i1));
+				i1++;
+			} else {
+				result.put(i, right.get(i2));
+				i2++;
+			}
+		}
+		return result;
+	}
+	
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		new TimetableService().execute();
+	}
+
 }

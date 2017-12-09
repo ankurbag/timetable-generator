@@ -2,6 +2,7 @@ package edu.neu.ga.controller;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +29,12 @@ public class TimetableController {
 
 	/**
 	 * Get the list of Classes
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Class> getClasses() {
+	public List<Class> getClasses() throws InterruptedException, ExecutionException {
 		logger.info("Invoke : TimetableController.");
 		return new TimetableService().execute();
 	}
