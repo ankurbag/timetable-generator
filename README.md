@@ -42,6 +42,11 @@ File -> Import -> Maven -> Existing Maven project
 
 4) Add project to the server
 
+5) GO to the chrome
+```
+http://localhost:8080/api/swagger-ui.html
+```
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
