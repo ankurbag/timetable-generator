@@ -1,24 +1,26 @@
+/**
+ * This is the controller layer of the application.
+ * @author ankurbag
+ * 
+ */
 package edu.neu.ga.controller;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.neu.ga.service.TimetableService;
 import io.swagger.annotations.Api;
-import edu.neu.ga.beans.*;
 import edu.neu.ga.beans.Class;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for TimetableController
  */
 @Controller
 @Api(value = "Timetable", description = "Timetable Controller")
