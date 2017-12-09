@@ -34,9 +34,17 @@ We have 2 projects in the repository
 ```
 git clone https://github.com/ankurbag/INFO6205_06.git
 ```
-2) Inside Eclipse/STS
+2) Inside Eclipse/STS Import the project
 ```
 File -> Import -> Maven -> Existing Maven project
+```
+3) Set-up server(Tomcat Apache 8.5) https://tomcat.apache.org/download-80.cgi
+
+4) Add project to the server
+
+5) GO to the chrome
+```
+http://localhost:8080/api/swagger-ui.html
 ```
 
 ## Running the tests
