@@ -3,6 +3,8 @@ Academic project to implement the Genetic Algorithm. We are aiming to create a r
 
 ## URL to test the REST API
 http://timetable-api.us-east-1.elasticbeanstalk.com/swagger-ui.html
+![image](https://user-images.githubusercontent.com/3647390/33792551-49542ace-dc71-11e7-9c02-346d9e3a3593.png)
+
 
 ## Getting Started
 
