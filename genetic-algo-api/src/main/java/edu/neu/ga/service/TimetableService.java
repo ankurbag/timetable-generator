@@ -1,8 +1,6 @@
 package edu.neu.ga.service;
 
-import java.beans.ConstructorProperties;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,7 +16,6 @@ import edu.neu.ga.beans.GeneticAlgorithm;
 import edu.neu.ga.beans.Population;
 import edu.neu.ga.beans.Schedule;
 import edu.neu.ga.beans.Timetable;
-import edu.neu.ga.controller.TimetableController;
 
 /**
  * The real stuff happens in the GeneticAlgorithm class and the Timetable class.
@@ -144,7 +141,7 @@ public class TimetableService {
 
 		// Merge the results
 		CompletableFuture<Map<Integer, Population>> combinedFuture = patition2.thenCombine(partition1, (xs1, xs2) -> {
-			System.out.println("In merge..");
+			logger.info("In merge..");
 			Map<Integer, Population> result = new LinkedHashMap<Integer, Population>(xs1.size() + xs2.size());
 			return merge(result, xs1, xs2);
 		});
@@ -155,10 +152,9 @@ public class TimetableService {
 
 		// Print fitness
 		timetable.createClasses(population.getFittest(0));
-		System.out.println();
-		System.out.println("Solution found in " + result.size() + " generations");
-		System.out.println("Final solution fitness: " + population.getFittest(0).getFitness());
-		System.out.println("Clashes: " + timetable.calcClashes());
+		logger.info("Solution found in " + result.size() + " generations");
+		logger.info("Final solution fitness: " + population.getFittest(0).getFitness());
+		logger.info("Clashes: " + timetable.calcClashes());
 
 		// Store in the Schedule
 		Class classes[] = timetable.getClasses();
@@ -263,7 +259,7 @@ public class TimetableService {
 		while (ga.isTerminationConditionMet(generation, 1000) == false
 				&& ga.isTerminationConditionMet(population) == false) {
 			// Print fitness
-			System.out.println("G" + generation + " Best fitness: " + population.getFittest(0).getFitness());
+			logger.info("G" + generation + " Best fitness: " + population.getFittest(0).getFitness());
 
 			// Apply crossover
 			population = ga.crossoverPopulation(population);
@@ -297,7 +293,6 @@ public class TimetableService {
 			Map<Integer, Population> right) {
 		int i1 = 1;
 		int i2 = 1;
-		System.out.println(left.size() + right.size());
 		int size = left.size() + right.size();
 		for (int i = 1; i < size; i++) {
 			if (i2 > right.size() || (i1 < left.size()

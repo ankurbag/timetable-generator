@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.deframe.api">
+	<logger name="edu.neu.ga">
 		<level value="info" />
 	</logger>
 	
