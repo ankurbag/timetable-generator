@@ -54,9 +54,9 @@ http://localhost:8080/api/swagger-ui.html
 Explain how to run the automated tests for this system
 
 ## Author
-#### Ishista B.
-#### Elton B.
-#### Ankur B.
+* Ishista B.
+* Elton B.
+* Ankur B.
 
 ## License
 * [MIT License](http://www.opensource.org/licenses/mit-license.php)
