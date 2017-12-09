@@ -27,11 +27,9 @@ Spring MVC
 
 ### Installing and running on the Local
 
-We have 1 project in the repository.
+We have 1 project in the repository
+#### API project - Spring MVC web framework
 
-```
-1. API project - Spring MVC web framework
-```
 1) In the command line
 ```
 git clone https://github.com/ankurbag/INFO6205_06.git
