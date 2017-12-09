@@ -1,5 +1,6 @@
 package edu.neu.ga.service;
 
+import java.beans.ConstructorProperties;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -18,10 +19,6 @@ import edu.neu.ga.beans.Timetable;
 import edu.neu.ga.controller.TimetableController;
 
 /**
- * Don't be daunted by the number of classes in this chapter -- most of them are
- * just simple containers for information, and only have a handful of properties
- * with setters and getters.
- * 
  * The real stuff happens in the GeneticAlgorithm class and the Timetable class.
  * 
  * The Timetable class is what the genetic algorithm is expected to create a
@@ -35,12 +32,6 @@ import edu.neu.ga.controller.TimetableController;
  * two classes simultaneously), and so is used by the GeneticAlgorithm's
  * calcFitness class as well.
  * 
- * Finally, we overload the Timetable class by entrusting it with the "database
- * information" generated here in initializeTimetable. Normally, that
- * information about what professors are employed and which classrooms the
- * university has would come from a database, but this isn't a book about
- * databases so we hardcode it.
- * 
  * @author ankur
  *
  */
@@ -53,11 +44,21 @@ public class TimetableService {
 
 	private static final Logger logger = LoggerFactory.getLogger(TimetableService.class);
 
+	// GA Parameters
+	private static final int POPULATION_SIZE = 1000;
+	private static final double MUTATION_RATE = 0.01;
+	private static final double CROSSOVER_RATE = 0.9;
+	private static final int ELITISCM_COUNT = 2;
+	private static final int TOURNAMENT_SIZE = 5;
+
+	/**
+	 * Constructor initializing the GA Parameters
+	 */
 	public TimetableService() {
 		timetable = initializeTimetable();
 
 		// Initialize GA
-		ga = new GeneticAlgorithm(100, 0.01, 0.9, 2, 5);
+		ga = new GeneticAlgorithm(POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, ELITISCM_COUNT, TOURNAMENT_SIZE);
 
 		// Initialize population
 		population = ga.initPopulation(timetable);
@@ -70,7 +71,7 @@ public class TimetableService {
 	}
 
 	/**
-	 * Returns List of Class. It is a single threaded execution.
+	 * Returns List of Class for a schedule. It is a single threaded execution.
 	 * 
 	 * @return
 	 */
@@ -118,35 +119,35 @@ public class TimetableService {
 	}
 
 	/**
-	 * Returns List of Class. Parallelized execution
+	 * Returns List of Class for Schedule. Parallelized execution using
+	 * CompletableFuture
 	 * 
 	 * @return
-	 * @throws ExecutionException 
-	 * @throws InterruptedException 
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 */
 	public List<Class> execute() throws InterruptedException, ExecutionException {
 
 		// Start evolution loop
-		
-		//Run Evolution for Partition 1
+
+		// Run Evolution for Partition 1
 		CompletableFuture<Map<Integer, Population>> partition1 = CompletableFuture.supplyAsync(() -> {
-			return evolve(ga,timetable);
+			return evolve(ga, timetable);
 		});
-		
-		//Run Evolution for Partition 2
+
+		// Run Evolution for Partition 2
 		CompletableFuture<Map<Integer, Population>> patition2 = CompletableFuture.supplyAsync(() -> {
-			return evolve(ga,timetable);
+			return evolve(ga, timetable);
 		});
 
-		//Merge the results
-		CompletableFuture<Map<Integer, Population>> combinedFuture = patition2.thenCombine(partition1,
-				(xs1, xs2) -> {
-					System.out.println("In merge..");
-					Map<Integer, Population> result = new LinkedHashMap(xs1.size() + xs2.size());
-					return merge(result, xs1, xs2);
-				});
+		// Merge the results
+		CompletableFuture<Map<Integer, Population>> combinedFuture = patition2.thenCombine(partition1, (xs1, xs2) -> {
+			System.out.println("In merge..");
+			Map<Integer, Population> result = new LinkedHashMap(xs1.size() + xs2.size());
+			return merge(result, xs1, xs2);
+		});
 
-		//Get the fittest population
+		// Get the fittest population
 		Map<Integer, Population> result = combinedFuture.get();
 		population = result.get(result.size());
 
@@ -175,6 +176,7 @@ public class TimetableService {
 		return Arrays.asList(classes);
 	}
 
+	// Helper Methods
 	/**
 	 * Creates a Timetable with all the necessary course information.
 	 * 
@@ -236,7 +238,7 @@ public class TimetableService {
 		timetable.addGroup(10, 25, new int[] { 3, 4 });
 		return timetable;
 	}
-	
+
 	/**
 	 * Creates a map of generation and population in ascending order.
 	 * 
@@ -248,10 +250,9 @@ public class TimetableService {
 		// Initialize Result
 		Map<Integer, Population> res = new HashMap();
 
+		// Initialize Population
 		Population population = ga.initPopulation(timetable);
-		// Evaluate population
-        ga.evalPopulation(population, timetable);
-        
+
 		// Evaluate population
 		ga.evalPopulation(population, timetable);
 
@@ -283,21 +284,24 @@ public class TimetableService {
 		return res;
 
 	}
-	
+
 	/**
 	 * Merge the results of 2 partitions in the order of population fitness.
+	 * 
 	 * @param result
 	 * @param left
 	 * @param right
 	 * @return
 	 */
-	private Map<Integer,Population> merge(Map<Integer,Population> result, Map<Integer,Population> left, Map<Integer,Population> right) {
+	private Map<Integer, Population> merge(Map<Integer, Population> result, Map<Integer, Population> left,
+			Map<Integer, Population> right) {
 		int i1 = 1;
 		int i2 = 1;
-		System.out.println(left.size()+right.size());
-		int size = left.size()+right.size();
-		for (int i = 1; i <size ; i++) {
-			if (i2 > right.size() || (i1 < left.size() && left.get(i1).getPopulationFitness() <= right.get(i2).getPopulationFitness())) {
+		System.out.println(left.size() + right.size());
+		int size = left.size() + right.size();
+		for (int i = 1; i < size; i++) {
+			if (i2 > right.size() || (i1 < left.size()
+					&& left.get(i1).getPopulationFitness() <= right.get(i2).getPopulationFitness())) {
 				result.put(i, left.get(i1));
 				i1++;
 			} else {
@@ -307,7 +311,7 @@ public class TimetableService {
 		}
 		return result;
 	}
-	
+
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		new TimetableService().execute();
 	}

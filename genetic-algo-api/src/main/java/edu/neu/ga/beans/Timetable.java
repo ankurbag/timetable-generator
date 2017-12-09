@@ -340,7 +340,7 @@ public class Timetable {
 			// Check room capacity
 			int roomCapacity = this.getRoom(classA.getRoomId()).getRoomCapacity();
 			int groupSize = this.getGroup(classA.getGroupId()).getGroupSize();
-			
+
 			if (roomCapacity < groupSize) {
 				clashes++;
 			}
@@ -356,7 +356,8 @@ public class Timetable {
 
 			// Check if professor is available
 			for (Class classB : this.classes) {
-				if (classA.getProfessorId() == classB.getProfessorId() && classA.getTimeslotId() == classB.getTimeslotId()
+				if (classA.getProfessorId() == classB.getProfessorId()
+						&& classA.getTimeslotId() == classB.getTimeslotId()
 						&& classA.getClassId() != classB.getClassId()) {
 					clashes++;
 					break;

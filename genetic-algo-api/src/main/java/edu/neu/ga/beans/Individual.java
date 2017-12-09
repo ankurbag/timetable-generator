@@ -1,8 +1,10 @@
 package edu.neu.ga.beans;
+
 public class Individual {
-	
+
 	/**
-	 * In this case, the chromosome is an array of integers rather than a string. 
+	 * In this case, the chromosome is an array of integers rather than a
+	 * string.
 	 */
 	private int[] chromosome;
 	private double fitness = -1;
@@ -61,25 +63,6 @@ public class Individual {
 	/**
 	 * Initializes random individual
 	 * 
-	 * The book instructs you to copy this constructor over from Chapter 4. This
-	 * case is a little tricky -- used in Chapter 4, this constructor will
-	 * create a valid chromosome for a list of cities for the TSP, by using each
-	 * city once and only once.
-	 * 
-	 * If used in Chapter 5, however, this will create an utterly INVALID
-	 * chromosome for the class scheduler. So you should not use this
-	 * constructor if you hope to create a valid random individual. For that
-	 * purpose, use the Individual(Timetable) constructor, which will create a
-	 * valid Individual from the fixed information in the Timetable object.
-	 * 
-	 * However, Chapter 5 still needs an Individual(int) constructor that
-	 * creates an Individual with a chromosome of a given size. It's used in the
-	 * crossoverPopulation method in order to initialize the offspring. The fact
-	 * that this creates an invalid Individual doesn't matter in this case,
-	 * because the crossover algorithm immediately rewrites the whole
-	 * chromosome.
-	 * 
-	 * 
 	 * @param chromosomeLength
 	 *            The length of the individuals chromosome
 	 */
@@ -87,27 +70,14 @@ public class Individual {
 		// Create random individual
 		int[] individual;
 		individual = new int[chromosomeLength];
-		
-		/**
-		 * This comment and the for loop doesn't make sense for this chapter.
-		 * But I'm leaving it in here because you were instructed to copy this
-		 * class from Chapter 4 -- and NOT having this comment here might be
-		 * more confusing than keeping it in.
-		 * 
-		 * Comment from Chapter 4:
-		 * 
-		 * "In this case, we can no longer simply pick 0s and 1s -- we need to
-		 * use every city index available. We also don't need to randomize or
-		 * shuffle this chromosome, as crossover and mutation will ultimately
-		 * take care of that for us."
-		 */
+
 		for (int gene = 0; gene < chromosomeLength; gene++) {
 			individual[gene] = gene;
 		}
-		
+
 		this.chromosome = individual;
 	}
-    
+
 	/**
 	 * Initializes individual with specific chromosome
 	 * 
@@ -175,7 +145,7 @@ public class Individual {
 	public double getFitness() {
 		return this.fitness;
 	}
-	
+
 	public String toString() {
 		String output = "";
 		for (int gene = 0; gene < this.chromosome.length; gene++) {
@@ -184,25 +154,4 @@ public class Individual {
 		return output;
 	}
 
-	/**
-	 * Search for a specific integer gene in this individual.
-	 * 
-	 * For instance, in a Traveling Salesman Problem where cities are encoded as
-	 * integers with the range, say, 0-99, this method will check to see if the
-	 * city "42" exists.
-	 * 
-	 * @param gene
-	 * @return
-	 */
-	public boolean containsGene(int gene) {
-		for (int i = 0; i < this.chromosome.length; i++) {
-			if (this.chromosome[i] == gene) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-	
 }

@@ -1,7 +1,8 @@
 package edu.neu.ga.beans;
 
 /**
- * Simple Room abstraction -- used to store the room capacity and compare against the student Group's size.
+ * Simple Room abstraction -- used to store the room capacity and compare
+ * against the student Group's size.
  */
 public class Room {
 	private final int roomId;

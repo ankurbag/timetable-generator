@@ -18,13 +18,15 @@ public class Population {
 		// Initial population
 		this.population = new Individual[populationSize];
 	}
-	
+
 	/**
-     * Initializes population of individuals
-     * 
-     * @param populationSize The size of the population
-     * @param timetable The timetable information
-     */
+	 * Initializes population of individuals
+	 * 
+	 * @param populationSize
+	 *            The size of the population
+	 * @param timetable
+	 *            The timetable information
+	 */
 	public Population(int populationSize, Timetable timetable) {
 		// Initial population
 		this.population = new Individual[populationSize];
@@ -37,7 +39,6 @@ public class Population {
 			this.population[individualCount] = individual;
 		}
 	}
-
 
 	/**
 	 * Initializes population of individuals
