@@ -185,10 +185,10 @@ public class TimetableService {
 		Timetable timetable = new Timetable();
 
 		// Set up rooms
-		timetable.addRoom(1, "A1", 15);
-		timetable.addRoom(2, "B1", 30);
-		timetable.addRoom(4, "D1", 20);
-		timetable.addRoom(5, "F1", 25);
+		timetable.addRoom(1, "Shillman 401", 15);
+		timetable.addRoom(2, "Shillman 402", 30);
+		timetable.addRoom(4, "Shillman 403", 20);
+		timetable.addRoom(5, "Shillman 404", 25);
 
 		// Set up timeslots
 		timetable.addTimeslot(1, "Mon 9:00 - 11:00");
@@ -208,18 +208,18 @@ public class TimetableService {
 		timetable.addTimeslot(15, "Fri 13:00 - 15:00");
 
 		// Set up professors
-		timetable.addProfessor(1, "Dr P Smith");
-		timetable.addProfessor(2, "Mrs E Mitchell");
-		timetable.addProfessor(3, "Dr R Williams");
-		timetable.addProfessor(4, "Mr A Thompson");
+		timetable.addProfessor(1, "Dr R Hillyard");
+		timetable.addProfessor(2, "Prof. Kal Bugrara");
+		timetable.addProfessor(3, "Prof. Yusuf Ozbek");
+		timetable.addProfessor(4, "Prof. Chaiyyaporn");
 
 		// Set up modules and define the professors that teach them
-		timetable.addModule(1, "cs1", "Computer Science", new int[] { 1, 2 });
-		timetable.addModule(2, "en1", "English", new int[] { 1, 3 });
-		timetable.addModule(3, "ma1", "Maths", new int[] { 1, 2 });
-		timetable.addModule(4, "ph1", "Physics", new int[] { 3, 4 });
-		timetable.addModule(5, "hi1", "History", new int[] { 4 });
-		timetable.addModule(6, "dr1", "Drama", new int[] { 1, 4 });
+		timetable.addModule(1, "pa", "Program Structure and Algorithm", new int[] { 1, 2 });
+		timetable.addModule(2, "adv", "Adv Database management Systems", new int[] { 1, 3 });
+		timetable.addModule(3, "db", "Database management Systems", new int[] { 3, 4 });
+		timetable.addModule(4, "wt", "Web Development and Web Tools", new int[] { 3, 4 });
+		timetable.addModule(5, "sc", "Bigdata using Scala", new int[] { 1 });
+		timetable.addModule(6, "aed", "App Engg and Design", new int[] { 2, 3 });
 
 		// Set up student groups and the modules they take.
 		timetable.addGroup(1, 10, new int[] { 1, 3, 4 });
