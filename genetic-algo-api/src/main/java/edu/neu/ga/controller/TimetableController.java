@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.neu.ga.service.TimetableService;
 import io.swagger.annotations.Api;
 import edu.neu.ga.beans.Class;
+import edu.neu.ga.beans.Schedule;
 
 /**
  * Handles requests for TimetableController
@@ -30,27 +31,27 @@ public class TimetableController {
 	private static final Logger logger = LoggerFactory.getLogger(TimetableController.class);
 
 	/**
-	 * Get the list of Classes
+	 * Get the Schedule. Thus is the parallel execution.
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping(value = "/parallelexecution", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Class> getSchedule() throws InterruptedException, ExecutionException {
+	public List<Schedule> getSchedule() throws InterruptedException, ExecutionException {
 		logger.info("Invoke : TimetableController.");
 		return new TimetableService().execute();
 	}
 	
 	/**
-	 * Get the list of Classes
+	 * Get the Schedule. Thus is the single-threaded execution.
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping(value = "/singlethreadedexecution", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Class> getSchedulesSingleThreaded() throws InterruptedException, ExecutionException {
+	public List<Schedule> getSchedulesSingleThreaded() throws InterruptedException, ExecutionException {
 		logger.info("Invoke : TimetableController.");
-		return new TimetableService().execute();
+		return new TimetableService().execute_without_parallisation();
 	}
 
 

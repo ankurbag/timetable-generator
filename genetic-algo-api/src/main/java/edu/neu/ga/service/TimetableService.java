@@ -1,6 +1,7 @@
 package edu.neu.ga.service;
 
 import java.beans.ConstructorProperties;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import edu.neu.ga.beans.Class;
 import edu.neu.ga.beans.GeneticAlgorithm;
 import edu.neu.ga.beans.Population;
+import edu.neu.ga.beans.Schedule;
 import edu.neu.ga.beans.Timetable;
 import edu.neu.ga.controller.TimetableController;
 
@@ -75,7 +77,7 @@ public class TimetableService {
 	 * 
 	 * @return
 	 */
-	public List<Class> execute_without_parallisation() {
+	public List<Schedule> execute_without_parallisation() {
 
 		// Start evolution loop
 		while (ga.isTerminationConditionMet(generation, 1000) == false
@@ -102,20 +104,20 @@ public class TimetableService {
 		logger.info("Final solution fitness: " + population.getFittest(0).getFitness());
 		logger.info("Clashes: " + timetable.calcClashes());
 
-		// Print classes
+		// Store in the Schedule
 		Class classes[] = timetable.getClasses();
+		List<Schedule> schedule = new ArrayList<>();
 		int classIndex = 1;
 		for (Class bestClass : classes) {
-			logger.info("Class " + classIndex + ":");
-			logger.info("Module: " + timetable.getModule(bestClass.getModuleId()).getModuleName());
-			logger.info("Group: " + timetable.getGroup(bestClass.getGroupId()).getGroupId());
-			logger.info("Room: " + timetable.getRoom(bestClass.getRoomId()).getRoomNumber());
-			logger.info("Professor: " + timetable.getProfessor(bestClass.getProfessorId()).getProfessorName());
-			logger.info("Time: " + timetable.getTimeslot(bestClass.getTimeslotId()).getTimeslot());
-			logger.info("-----");
+			Schedule sc = new Schedule(classIndex, timetable.getGroup(bestClass.getGroupId()).getGroupId(),
+					timetable.getModule(bestClass.getModuleId()).getModuleName(),
+					timetable.getProfessor(bestClass.getProfessorId()).getProfessorName(),
+					timetable.getTimeslot(bestClass.getTimeslotId()).getTimeslot(),
+					timetable.getRoom(bestClass.getRoomId()).getRoomNumber());
+			schedule.add(sc);
 			classIndex++;
 		}
-		return Arrays.asList(classes);
+		return schedule;
 	}
 
 	/**
@@ -126,7 +128,7 @@ public class TimetableService {
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
-	public List<Class> execute() throws InterruptedException, ExecutionException {
+	public List<Schedule> execute() throws InterruptedException, ExecutionException {
 
 		// Start evolution loop
 
@@ -143,7 +145,7 @@ public class TimetableService {
 		// Merge the results
 		CompletableFuture<Map<Integer, Population>> combinedFuture = patition2.thenCombine(partition1, (xs1, xs2) -> {
 			System.out.println("In merge..");
-			Map<Integer, Population> result = new LinkedHashMap(xs1.size() + xs2.size());
+			Map<Integer, Population> result = new LinkedHashMap<Integer, Population>(xs1.size() + xs2.size());
 			return merge(result, xs1, xs2);
 		});
 
@@ -158,22 +160,20 @@ public class TimetableService {
 		System.out.println("Final solution fitness: " + population.getFittest(0).getFitness());
 		System.out.println("Clashes: " + timetable.calcClashes());
 
-		// Print classes
-		System.out.println();
+		// Store in the Schedule
 		Class classes[] = timetable.getClasses();
+		List<Schedule> schedule = new ArrayList<>();
 		int classIndex = 1;
 		for (Class bestClass : classes) {
-			System.out.println("Class " + classIndex + ":");
-			System.out.println("Module: " + timetable.getModule(bestClass.getModuleId()).getModuleName());
-			System.out.println("Group: " + timetable.getGroup(bestClass.getGroupId()).getGroupId());
-			System.out.println("Room: " + timetable.getRoom(bestClass.getRoomId()).getRoomNumber());
-			System.out.println("Professor: " + timetable.getProfessor(bestClass.getProfessorId()).getProfessorName());
-			System.out.println("Time: " + timetable.getTimeslot(bestClass.getTimeslotId()).getTimeslot());
-			System.out.println("-----");
+			Schedule sc = new Schedule(classIndex, timetable.getGroup(bestClass.getGroupId()).getGroupId(),
+					timetable.getModule(bestClass.getModuleId()).getModuleName(),
+					timetable.getProfessor(bestClass.getProfessorId()).getProfessorName(),
+					timetable.getTimeslot(bestClass.getTimeslotId()).getTimeslot(),
+					timetable.getRoom(bestClass.getRoomId()).getRoomNumber());
+			schedule.add(sc);
 			classIndex++;
 		}
-
-		return Arrays.asList(classes);
+		return schedule;
 	}
 
 	// Helper Methods
