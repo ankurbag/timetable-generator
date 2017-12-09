@@ -1,7 +1,7 @@
 # Project: Time Table Generator 
 Academic project to implement the Genetic Algorithm. We are aiming to create a rest project for generating Timetable(Class Schedule).
 
-## URL of REST
+## URL to test the REST API
 http://timetable-api.us-east-1.elasticbeanstalk.com/swagger-ui.html
 
 ## Getting Started
@@ -42,7 +42,7 @@ File -> Import -> Maven -> Existing Maven project
 
 4) Add project to the server
 
-5) GO to the chrome
+5) Go to the chrome browser
 ```
 http://localhost:8080/api/swagger-ui.html
 ```
@@ -52,9 +52,9 @@ http://localhost:8080/api/swagger-ui.html
 Explain how to run the automated tests for this system
 
 ## Author
-Ishista B.
-Elton B.
-Ankur B.
+#### Ishista B.
+#### Elton B.
+#### Ankur B.
 
 ## License
 * [MIT License](http://www.opensource.org/licenses/mit-license.php)
