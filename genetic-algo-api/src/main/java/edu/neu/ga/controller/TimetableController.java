@@ -22,7 +22,7 @@ import edu.neu.ga.beans.Class;
  */
 @Controller
 @Api(value = "Timetable", description = "Timetable Controller")
-@RequestMapping("/classes")
+@RequestMapping("/schedule")
 public class TimetableController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TimetableController.class);
@@ -32,9 +32,21 @@ public class TimetableController {
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/parallelexecution", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Class> getClasses() throws InterruptedException, ExecutionException {
+	public List<Class> getSchedule() throws InterruptedException, ExecutionException {
+		logger.info("Invoke : TimetableController.");
+		return new TimetableService().execute();
+	}
+	
+	/**
+	 * Get the list of Classes
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
+	 */
+	@RequestMapping(value = "/singlethreadedexecution", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Class> getSchedulesSingleThreaded() throws InterruptedException, ExecutionException {
 		logger.info("Invoke : TimetableController.");
 		return new TimetableService().execute();
 	}
