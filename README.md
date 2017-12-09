@@ -23,9 +23,9 @@ Java-8
 Spring MVC
 ```
 
-### Installing
+### Installing and running on the Local
 
-We have 2 projects in the repository
+We have 1 project in the repository.
 
 ```
 1. API project - Spring MVC web framework
