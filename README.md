@@ -27,11 +27,9 @@ Spring MVC
 
 ### Installing and running on the Local
 
-We have 1 project in the repository.
+We have 1 project in the repository
+#### API project - Spring MVC web framework
 
-```
-1. API project - Spring MVC web framework
-```
 1) In the command line
 ```
 git clone https://github.com/ankurbag/INFO6205_06.git
@@ -54,9 +52,9 @@ http://localhost:8080/api/swagger-ui.html
 Explain how to run the automated tests for this system
 
 ## Author
-#### Ishista B.
-#### Elton B.
-#### Ankur B.
+* Ishista B.
+* Elton B.
+* Ankur B.
 
 ## License
 * [MIT License](http://www.opensource.org/licenses/mit-license.php)
