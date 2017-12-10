@@ -49,7 +49,25 @@ http://localhost:8080/api/swagger-ui.html
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+We used JUnit, which is a Java library to help you perform unit testing. Unit testing is the process of examining a small "unit" of software (usually a single class) to verify that it meets its expectations or specification.
+
+1) In the pom.xml
+```
+<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+```
+2) Inside Eclipse/STS Right click on the the project and do the following
+```
+<Project_Name_Folder> -> Run as -> JUnit Test
+```
+3) If JUnit Test not configured, then run individually on the ``GeneticTest`` and ``TimetableTest``
+
+4) You should see the following result -
+![image](https://user-images.githubusercontent.com/3647390/33802135-3074d88c-dd3e-11e7-8e0f-185d7f7433f8.png)
 
 ## Author
 * Ishista B.
