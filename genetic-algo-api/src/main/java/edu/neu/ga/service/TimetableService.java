@@ -44,7 +44,7 @@ public class TimetableService {
 	private static final Logger logger = LoggerFactory.getLogger(TimetableService.class);
 
 	// GA Parameters
-	private static final int POPULATION_SIZE = 1000;
+	private static final int POPULATION_SIZE = 100;
 	private static final double MUTATION_RATE = 0.01;
 	private static final double CROSSOVER_RATE = 0.9;
 	private static final int ELITISCM_COUNT = 2;
