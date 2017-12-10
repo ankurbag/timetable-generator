@@ -24,6 +24,8 @@ public class Class {
 		this.moduleId = moduleId;
 		this.groupId = groupId;
 	}
+	
+	
 
 	/**
 	 * Add professor to class
