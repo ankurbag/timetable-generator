@@ -242,7 +242,7 @@ public class TimetableService {
 	 * @param timetable
 	 * @return Map <Integer,Population>
 	 */
-	private Map<Integer, Population> evolve(GeneticAlgorithm ga, Timetable timetable) {
+	public Map<Integer, Population> evolve(GeneticAlgorithm ga, Timetable timetable) {
 		// Initialize Result
 		Map<Integer, Population> res = new HashMap();
 
@@ -289,7 +289,7 @@ public class TimetableService {
 	 * @param right
 	 * @return
 	 */
-	private Map<Integer, Population> merge(Map<Integer, Population> result, Map<Integer, Population> left,
+	public Map<Integer, Population> merge(Map<Integer, Population> result, Map<Integer, Population> left,
 			Map<Integer, Population> right) {
 		int i1 = 1;
 		int i2 = 1;
