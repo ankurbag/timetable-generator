@@ -1,17 +1,25 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.neu.ga.beans.GeneticAlgorithm;
 import edu.neu.ga.beans.Population;
 import edu.neu.ga.beans.Timetable;
-
+/**
+ * This is the Test case to test the Genetic Algorithm processing.
+ * @author ankurbag/elton/ishita
+ *
+ */
 public class GeneticTest {
 
-	
+	private static final Logger logger = LoggerFactory.getLogger(GeneticTest.class);
+
+	//Test the mutation
 	@Test
 	public void Mutationtest() {
-		
+
 		Timetable timetable = new Timetable();
 
 		// Set up rooms
@@ -62,30 +70,19 @@ public class GeneticTest {
 		timetable.addGroup(8, 18, new int[] { 2, 6 });
 		timetable.addGroup(9, 24, new int[] { 1, 6 });
 		timetable.addGroup(10, 25, new int[] { 3, 4 });
-		
-		
-		
-		
-		GeneticAlgorithm ga=new GeneticAlgorithm(20,12,15,15,20);
-		Population pp=new Population(2,timetable);
-		
-		Population p=ga.mutatePopulation(pp, timetable);
-		
-	
-	assertNotSame("not same", pp, p);
-		
-	//	assertEquals(pp,p);
-		
-		
-		
-		
+
+		GeneticAlgorithm ga = new GeneticAlgorithm(20, 12, 15, 15, 20);
+		Population pp = new Population(2, timetable);
+
+		Population p = ga.mutatePopulation(pp, timetable);
+
+		assertNotSame("not same", pp, p);
 	}
-	
-	
-	
+
+	//Test case to test the crossover
 	@Test
 	public void CrossOvertest() {
-		
+
 		Timetable timetable = new Timetable();
 
 		// Set up rooms
@@ -136,29 +133,20 @@ public class GeneticTest {
 		timetable.addGroup(8, 18, new int[] { 2, 6 });
 		timetable.addGroup(9, 24, new int[] { 1, 6 });
 		timetable.addGroup(10, 25, new int[] { 3, 4 });
-		
-		
-		
-		
-		GeneticAlgorithm ga=new GeneticAlgorithm(20,12,15,15,20);
-		Population pp=new Population(2,timetable);
-		
-		Population p=ga.crossoverPopulation(pp);
-		
-	
-	assertNotSame("not same", pp, p);
-		
-	//assertEquals(pp,p);
-		
-		
-		
-		
+
+		GeneticAlgorithm ga = new GeneticAlgorithm(20, 12, 15, 15, 20);
+		Population pp = new Population(2, timetable);
+
+		Population p = ga.crossoverPopulation(pp);
+
+		assertNotSame("not same", pp, p);
+
 	}
-	
-	
+
+	// Evaluate the fitness of the population
 	@Test
 	public void EvalPopulationtest() {
-		
+
 		Timetable timetable = new Timetable();
 
 		// Set up rooms
@@ -209,22 +197,12 @@ public class GeneticTest {
 		timetable.addGroup(8, 18, new int[] { 2, 6 });
 		timetable.addGroup(9, 24, new int[] { 1, 6 });
 		timetable.addGroup(10, 25, new int[] { 3, 4 });
-		
-		
-		
-		
-		GeneticAlgorithm ga=new GeneticAlgorithm(20,12,15,15,20);
-		Population pp=new Population(2,timetable);
-		
-	ga.evalPopulation(pp, timetable);
-		
-	
-	assertNotNull("not null", pp.getPopulationFitness());
-		
-	//assertEquals(pp,p);
-		
-		
-		
-		
+
+		GeneticAlgorithm ga = new GeneticAlgorithm(20, 12, 15, 15, 20);
+		Population pp = new Population(2, timetable);
+
+		ga.evalPopulation(pp, timetable);
+
+		assertNotNull("not null", pp.getPopulationFitness());
 	}
 }
