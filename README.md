@@ -69,7 +69,10 @@ We used JUnit, which is a Java library to help you perform unit testing. Unit te
 4) You should see the following result -
 ![image](https://user-images.githubusercontent.com/3647390/33802135-3074d88c-dd3e-11e7-8e0f-185d7f7433f8.png)
 
-## Author
+## Report 
+Our report is present in the repository under the report folder.
+
+## Authors
 * Ishista B.
 * Elton B.
 * Ankur B.
